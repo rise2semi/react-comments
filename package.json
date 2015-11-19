@@ -1,0 +1,13 @@
+{
+  "name": "react-comments",
+  "version": "0.0.1",
+  "description": "Project for learning React",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rise2semi/react-comments.git"
+  },
+  "author": "Borys Semerenko <rise2semi@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/rise2semi/react-comments/issues"
+  }
+}
