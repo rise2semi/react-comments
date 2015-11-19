@@ -9,5 +9,9 @@
   "author": "Borys Semerenko <rise2semi@gmail.com>",
   "bugs": {
     "url": "https://github.com/rise2semi/react-comments/issues"
+  },
+  "dependencies": {
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3"
   }
 }
