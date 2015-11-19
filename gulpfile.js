@@ -29,6 +29,7 @@ gulp.task('server', ['copy'], function () {
     var serverPort = process.env.PORT || 9000;
 
     connect.server({
+        root: config.dist,
         port: serverPort
     });
 });
