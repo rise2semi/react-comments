@@ -37,6 +37,4 @@ gulp.task('server', ['copy'], function () {
 /**
  * Default gulp task
  */
-gulp.task('default', function () {
-   console.log('No task specified');
-});
+gulp.task('default', ['server']);
