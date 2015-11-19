@@ -9,6 +9,14 @@ var config = {
 };
 
 /**
+ * Copy index file
+ */
+gulp.task('copy', function () {
+    gulp.src( config.index )
+        .pipe( gulp.dest( config.dist ) );
+});
+
+/**
  * Default gulp task
  */
 gulp.task('default', function () {
