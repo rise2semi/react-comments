@@ -8,19 +8,48 @@ var es6transpiler = require('gulp-es6-transpiler');
 var jsx = require('gulp-jsx');
 var concat = require('gulp-concat');
 var minify = require('gulp-minify');
-
+var connect = require('gulp-connect');
 
 /**
  * Specify config for tasks
 */
 var config = {
+    index: 'src/index.html',
+    src: 'src',
+    dist: './dist',
     distCss: 'dist/css',
     distJs: 'dist/js'
 };
+
+/**
+ * Copy index file
+ */
+gulp.task('copy', function () {
+    gulp.src( config.index )
+        .pipe( gulp.dest( config.dist ) );
+});
+
+/**
+ * Start local server for development
+ */
+gulp.task('server', ['style', 'scripts', 'copy'], function () {
+
+    /**
+     * Listening port can be specified manually via command `PORT=7777 gulp`
+     * @type {number}
+     */
+    var serverPort = process.env.PORT || 9000;
+
+    connect.server({
+        root: config.dist,
+        port: serverPort
+    });
+});
+
 /**
  * Style task
  */
- gulp.task('default', function() {
+ gulp.task('style', function() {
     gulp.src('src/styles/**/*.sass')
         .pipe(sass())
         .pipe(concatCss('styles.css'))
@@ -28,10 +57,11 @@ var config = {
         .pipe(rename('styles.min.css'))
         .pipe(gulp.dest( config.distCss ));
 });
+
 /**
  * JaveScript task
  */
- gulp.task('default', function () {
+ gulp.task('scripts', function () {
  	return gulp.src('src/js/**/*.ts')
  		.pipe(ts({
  			noImplicitAny: true
