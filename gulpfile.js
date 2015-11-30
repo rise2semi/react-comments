@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var connect = require('gulp-connect');
 var concat = require('gulp-concat-css');
 var sass = require('gulp-sass');
+var minifyCss = require('gulp-minify-css');
 
 /**
  * Specify config for tasks
