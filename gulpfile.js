@@ -1,11 +1,14 @@
 var gulp = require('gulp');
 var connect = require('gulp-connect');
+var concat = require('gulp-concat-css');
+var sass = require('gulp-sass');
 
 /**
  * Specify config for tasks
  */
 var config = {
     index: 'src/index.html',
+    src: 'src',
     dist: './dist'
 };
 
@@ -20,7 +23,7 @@ gulp.task('copy', function () {
 /**
  * Start local server for development
  */
-gulp.task('server', ['copy'], function () {
+gulp.task('server', ['style', 'copy'], function () {
 
     /**
      * Listening port can be specified manually via command `PORT=7777 gulp`
@@ -32,6 +35,15 @@ gulp.task('server', ['copy'], function () {
         root: config.dist,
         port: serverPort
     });
+});
+
+/**
+ * Style task
+ */
+gulp.task('style', function () {
+    gulp.src(config.src + '/styles/**/*.sass')
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest(config.dist + '/css/'));
 });
 
 /**
