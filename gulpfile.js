@@ -5,11 +5,12 @@ var minifyCss = require('gulp-minify-css');
 var rename = require("gulp-rename");
 
 /**
- * Default gulp task
- */
-gulp.task('default', function () {
-   console.log('No task specified');
-});
+- * Default gulp task
++ * Specify config for tasks
++ */
+var config = {
+    distCss: 'dist/css'
+};
 /**
  * Style task
  */
@@ -19,5 +20,5 @@ gulp.task('default', function () {
         .pipe(concat('styles.css'))
         .pipe(minifyCss())
         .pipe(rename('styles.min.css'))
-        .pipe(gulp.dest('dist/css/'));
+        .pipe(gulp.dest( config.distCss ));
 });
