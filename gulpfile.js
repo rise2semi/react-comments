@@ -3,7 +3,7 @@ var connect = require('gulp-connect');
 var concat = require('gulp-concat-css');
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
-var rename = require("gulp-rename");
+var rename = require('gulp-rename');
 
 /**
  * Specify config for tasks
@@ -11,7 +11,8 @@ var rename = require("gulp-rename");
 var config = {
     index: 'src/index.html',
     src: 'src',
-    dist: './dist'
+    dist: './dist',
+    distCss: './dist/css'
 };
 
 /**
@@ -42,10 +43,14 @@ gulp.task('server', ['style', 'copy'], function () {
 /**
  * Style task
  */
-gulp.task('style', function () {
-    gulp.src(config.src + '/styles/**/*.sass')
-        .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest(config.dist + '/css/'));
+
+ gulp.task('style', function() {
+    gulp.src('src/styles/**/*.sass')
+        .pipe(sass())
+        .pipe(concat('styles.css'))
+        .pipe(minifyCss())
+        .pipe(rename('styles.min.css'))
+        .pipe(gulp.dest( config.distCss ));
 });
 
 /**
