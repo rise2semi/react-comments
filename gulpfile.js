@@ -12,13 +12,13 @@ var connect = require('gulp-connect');
 
 /**
  * Specify config for tasks
-*/
+ */
 var config = {
     index: 'src/index.html',
     src: 'src',
     dist: './dist',
-    distCss: 'dist/css',
-    distJs: 'dist/js'
+    distCss: './dist/css',
+    distJs: './dist/js'
 };
 
 /**
@@ -52,7 +52,7 @@ gulp.task('server', ['style', 'scripts', 'copy'], function () {
  gulp.task('style', function() {
     gulp.src('src/styles/**/*.sass')
         .pipe(sass())
-        .pipe(concatCss('styles.css'))
+        .pipe(concat('styles.css'))
         .pipe(minifyCss())
         .pipe(rename('styles.min.css'))
         .pipe(gulp.dest( config.distCss ));
