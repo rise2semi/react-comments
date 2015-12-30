@@ -41,6 +41,7 @@ var config = {
       factory: 'React.createClass'
     }))
     .pipe(concat('scripts.js'))
-    .pipe(minify())
+    .pipe(rename('scripts.min.js'))
+    .pipe(minify())    
  		.pipe(gulp.dest(config.distJs));
  });
