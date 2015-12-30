@@ -7,6 +7,7 @@ var ts = require('gulp-typescript');
 var es6transpiler = require('gulp-es6-transpiler');
 var jsx = require('gulp-jsx');
 var concat = require('gulp-concat');
+var minify = require('gulp-minify');
 
 
 /**
@@ -40,5 +41,6 @@ var config = {
       factory: 'React.createClass'
     }))
     .pipe(concat('scripts.js'))
+    .pipe(minify())
  		.pipe(gulp.dest(config.distJs));
  });

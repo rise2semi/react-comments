@@ -22,6 +22,7 @@
     "gulp-concat-css": "^2.2.0",
     "gulp-es6-transpiler": "^1.0.1",
     "gulp-jsx": "^2.0.1",
+    "gulp-minify": "0.0.5",
     "gulp-minify-css": "^1.2.2",
     "gulp-sass": "^2.1.0"
   }
