@@ -3,6 +3,8 @@ var concat = require('gulp-concat-css');
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require("gulp-rename");
+var ts = require('gulp-typescript');
+
 
 /**
 - * Default gulp task
@@ -22,3 +24,14 @@ var config = {
         .pipe(rename('styles.min.css'))
         .pipe(gulp.dest( config.distCss ));
 });
+/**
+ * JaveScript task
+ */
+ gulp.task('default', function () {
+ 	return gulp.src('src/src/**/*.ts')
+ 		.pipe(ts({
+ 			noImplicitAny: true,
+ 			out: 'output.js'
+ 		}))
+ 		.pipe(gulp.dest('built/local'));
+ });
