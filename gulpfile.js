@@ -4,6 +4,7 @@ var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require("gulp-rename");
 var ts = require('gulp-typescript');
+var es6transpiler = require('gulp-es6-transpiler');
 
 
 /**
@@ -34,5 +35,6 @@ var config = {
  			noImplicitAny: true,
  			out: 'output.js'
  		}))
+    .pipe(es6transpiler())
  		.pipe(gulp.dest(config.distJs));
  });
