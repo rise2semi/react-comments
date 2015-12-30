@@ -9,9 +9,8 @@ var jsx = require('gulp-jsx');
 
 
 /**
-- * Default gulp task
-+ * Specify config for tasks
-+ */
+ * Specify config for tasks
+*/
 var config = {
     distCss: 'dist/css',
     distJs: 'dist/js'
@@ -33,12 +32,12 @@ var config = {
  gulp.task('default', function () {
  	return gulp.src('src/js/**/*.ts')
  		.pipe(ts({
- 			noImplicitAny: true,
- 			out: 'output.js'
+ 			noImplicitAny: true
  		}))
     .pipe(es6transpiler())
     .pipe(jsx({
       factory: 'React.createClass'
     }))
+    .pipe(concat('scripts.js'))
  		.pipe(gulp.dest(config.distJs));
  });
