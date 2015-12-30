@@ -18,6 +18,7 @@
   },
   "devDependencies": {
     "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
     "gulp-concat-css": "^2.2.0",
     "gulp-es6-transpiler": "^1.0.1",
     "gulp-jsx": "^2.0.1",
