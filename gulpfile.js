@@ -11,7 +11,8 @@ var ts = require('gulp-typescript');
 + * Specify config for tasks
 + */
 var config = {
-    distCss: 'dist/css'
+    distCss: 'dist/css',
+    distJs: 'dist/js'
 };
 /**
  * Style task
@@ -28,10 +29,10 @@ var config = {
  * JaveScript task
  */
  gulp.task('default', function () {
- 	return gulp.src('src/src/**/*.ts')
+ 	return gulp.src('src/js/**/*.ts')
  		.pipe(ts({
  			noImplicitAny: true,
  			out: 'output.js'
  		}))
- 		.pipe(gulp.dest('built/local'));
+ 		.pipe(gulp.dest(config.distJs));
  });
