@@ -44,6 +44,25 @@ gulp.task('server', ['style', 'scripts', 'copy'], function () {
         root: config.dist,
         port: serverPort
     });
+
+});
+
+/**
+ * JaveScript task
+ */
+gulp.task('scripts', function () {
+ 	return gulp.src('src/js/**/*.ts')
+ 		.pipe(ts({
+ 			noImplicitAny: true
+ 		}))
+    .pipe(es6transpiler())
+    .pipe(jsx({
+      factory: 'React.createClass'
+    }))
+    .pipe(concat('scripts.js'))
+    .pipe(rename('scripts.min.js'))
+    .pipe(minify())    
+ 		.pipe(gulp.dest(config.distJs));
 });
 
 /**
@@ -59,19 +78,6 @@ gulp.task('server', ['style', 'scripts', 'copy'], function () {
 });
 
 /**
- * JaveScript task
+ * Default gulp task
  */
- gulp.task('scripts', function () {
- 	return gulp.src('src/js/**/*.ts')
- 		.pipe(ts({
- 			noImplicitAny: true
- 		}))
-    .pipe(es6transpiler())
-    .pipe(jsx({
-      factory: 'React.createClass'
-    }))
-    .pipe(concat('scripts.js'))
-    .pipe(rename('scripts.min.js'))
-    .pipe(minify())    
- 		.pipe(gulp.dest(config.distJs));
- });
+gulp.task('default', ['server']);
