@@ -1,9 +1,14 @@
 var gulp = require('gulp');
-var connect = require('gulp-connect');
-var concat = require('gulp-concat-css');
+var concatCss = require('gulp-concat-css');
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
+var ts = require('gulp-typescript');
+var es6transpiler = require('gulp-es6-transpiler');
+var jsx = require('gulp-jsx');
+var concat = require('gulp-concat');
+var minify = require('gulp-minify');
+var connect = require('gulp-connect');
 
 /**
  * Specify config for tasks
@@ -12,7 +17,8 @@ var config = {
     index: 'src/index.html',
     src: 'src',
     dist: './dist',
-    distCss: './dist/css'
+    distCss: './dist/css',
+    distJs: './dist/js'
 };
 
 /**
@@ -26,7 +32,7 @@ gulp.task('copy', function () {
 /**
  * Start local server for development
  */
-gulp.task('server', ['style', 'copy'], function () {
+gulp.task('server', ['style', 'scripts', 'copy'], function () {
 
     /**
      * Listening port can be specified manually via command `PORT=7777 gulp`
@@ -38,12 +44,30 @@ gulp.task('server', ['style', 'copy'], function () {
         root: config.dist,
         port: serverPort
     });
+
+});
+
+/**
+ * JaveScript task
+ */
+gulp.task('scripts', function () {
+ 	return gulp.src('src/js/**/*.ts')
+ 		.pipe(ts({
+ 			noImplicitAny: true
+ 		}))
+    .pipe(es6transpiler())
+    .pipe(jsx({
+      factory: 'React.createClass'
+    }))
+    .pipe(concat('scripts.js'))
+    .pipe(rename('scripts.min.js'))
+    .pipe(minify())    
+ 		.pipe(gulp.dest(config.distJs));
 });
 
 /**
  * Style task
  */
-
  gulp.task('style', function() {
     gulp.src('src/styles/**/*.sass')
         .pipe(sass())
