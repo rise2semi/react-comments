@@ -1,12 +1,18 @@
 var gulp = require('gulp');
 var connect = require('gulp-connect');
+var concat = require('gulp-concat-css');
+var sass = require('gulp-sass');
+var minifyCss = require('gulp-minify-css');
+var rename = require('gulp-rename');
 
 /**
  * Specify config for tasks
  */
 var config = {
     index: 'src/index.html',
-    dist: './dist'
+    src: 'src',
+    dist: './dist',
+    distCss: './dist/css'
 };
 
 /**
@@ -20,7 +26,7 @@ gulp.task('copy', function () {
 /**
  * Start local server for development
  */
-gulp.task('server', ['copy'], function () {
+gulp.task('server', ['style', 'copy'], function () {
 
     /**
      * Listening port can be specified manually via command `PORT=7777 gulp`
@@ -32,6 +38,19 @@ gulp.task('server', ['copy'], function () {
         root: config.dist,
         port: serverPort
     });
+});
+
+/**
+ * Style task
+ */
+
+ gulp.task('style', function() {
+    gulp.src('src/styles/**/*.sass')
+        .pipe(sass())
+        .pipe(concat('styles.css'))
+        .pipe(minifyCss())
+        .pipe(rename('styles.min.css'))
+        .pipe(gulp.dest( config.distCss ));
 });
 
 /**
