@@ -60,8 +60,7 @@ gulp.task('scripts', function () {
       factory: 'React.createClass'
     }))
     .pipe(concat('scripts.js'))
-    .pipe(minify())    
-    .pipe(rename('scripts.min.js'))
+    .pipe(minify({ ext: { min: '.min.js' } }))
  		.pipe(gulp.dest(config.distJs));
 });
 
