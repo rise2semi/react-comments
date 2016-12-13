@@ -9,6 +9,7 @@ var jsx = require('gulp-jsx');
 var concat = require('gulp-concat');
 var minify = require('gulp-minify');
 var connect = require('gulp-connect');
+var watch =  require('gulp-watch');
 
 /**
  * Specify config for tasks
@@ -77,6 +78,14 @@ gulp.task('scripts', function () {
 });
 
 /**
+ * Watch task
+ */
+gulp.task('watch', function () {
+    gulp.watch('src/styles/**/*.sass', ['style']);
+    gulp.watch('src/js/**/*.ts', ['scripts']);
+});
+
+/**
  * Default gulp task
  */
-gulp.task('default', ['server']);
+gulp.task('default', ['watch','server']);
