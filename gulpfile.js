@@ -19,7 +19,9 @@ var config = {
     src: 'src',
     dist: './dist',
     distCss: './dist/css',
-    distJs: './dist/js'
+    distJs: './dist/js',
+    srcCss: 'src/styles/**/*.sass',
+    srcJs: 'src/js/**/*.ts'
 };
 
 /**
@@ -52,7 +54,7 @@ gulp.task('server', ['style', 'scripts', 'copy'], function () {
  * JaveScript task
  */
 gulp.task('scripts', function () {
- 	return gulp.src('src/js/**/*.ts')
+ 	return gulp.src(config.srcJs)
  		.pipe(ts({
  			noImplicitAny: true
  		}))
@@ -69,7 +71,7 @@ gulp.task('scripts', function () {
  * Style task
  */
  gulp.task('style', function() {
-    gulp.src('src/styles/**/*.sass')
+    gulp.src(config.srcCss)
         .pipe(sass())
         .pipe(concat('styles.css'))
         .pipe(minifyCss())
@@ -81,8 +83,8 @@ gulp.task('scripts', function () {
  * Watch task
  */
 gulp.task('watch', function () {
-    gulp.watch('src/styles/**/*.sass', ['style']);
-    gulp.watch('src/js/**/*.ts', ['scripts']);
+    gulp.watch(config.srcCss, ['style']);
+    gulp.watch(config.srcJs, ['scripts']);
 });
 
 /**
