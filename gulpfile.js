@@ -83,8 +83,12 @@ gulp.task('scripts', function () {
  * Watch task
  */
 gulp.task('watch', function () {
-    watch.(config.srcCss, ['style']);
-    watch.(config.srcJs, ['scripts']);
+  watch(config.srcCss, function () {
+    gulp.start('style');
+  });
+  watch(config.srcJs, function () {
+    gulp.start('scripts');
+  });
 });
 
 /**
