@@ -3,13 +3,14 @@ var concatCss = require('gulp-concat-css');
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
-var ts = require('gulp-typescript');
-var es6transpiler = require('gulp-es6-transpiler');
 var jsx = require('gulp-jsx');
 var concat = require('gulp-concat');
 var minify = require('gulp-minify');
 var connect = require('gulp-connect');
 var watch =  require('gulp-watch');
+var browserify = require('gulp-browserify');
+var react = require('gulp-react');
+// var react_render = require('gulp-react-render');
 
 /**
  * Specify config for tasks
@@ -21,7 +22,7 @@ var config = {
     distCss: './dist/css',
     distJs: './dist/js',
     srcCss: 'src/styles/**/*.sass',
-    srcJs: 'src/js/**/*.ts'
+    srcJs: 'src/js/**/*.jsx'
 };
 
 /**
@@ -55,15 +56,17 @@ gulp.task('server', ['style', 'scripts', 'copy'], function () {
  */
 gulp.task('scripts', function () {
  	return gulp.src(config.srcJs)
- 		.pipe(ts({
- 			noImplicitAny: true
- 		}))
-    .pipe(es6transpiler())
     .pipe(jsx({
       factory: 'React.createClass'
     }))
+    // .pipe(react())
     .pipe(concat('scripts.js'))
+    .pipe(browserify({
+      insertGlobals : true,
+      debug : !gulp.env.production
+    }))
     .pipe(minify({ ext: { min: '.min.js' } }))
+    // .pipe(react_render())
  		.pipe(gulp.dest(config.distJs));
 });
 
