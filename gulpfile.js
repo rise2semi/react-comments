@@ -8,9 +8,8 @@ var concat = require('gulp-concat');
 var minify = require('gulp-minify');
 var connect = require('gulp-connect');
 var watch =  require('gulp-watch');
+var babelify = require('babelify');
 var browserify = require('gulp-browserify');
-var react = require('gulp-react');
-// var react_render = require('gulp-react-render');
 
 /**
  * Specify config for tasks
@@ -59,14 +58,9 @@ gulp.task('scripts', function () {
     .pipe(jsx({
       factory: 'React.createClass'
     }))
-    // .pipe(react())
     .pipe(concat('scripts.js'))
-    .pipe(browserify({
-      insertGlobals : true,
-      debug : !gulp.env.production
-    }))
+    browserify().transform("babelify", {presets: ["es2015"]})
     .pipe(minify({ ext: { min: '.min.js' } }))
-    // .pipe(react_render())
  		.pipe(gulp.dest(config.distJs));
 });
 
