@@ -8,21 +8,10 @@ var concat = require('gulp-concat');
 var minify = require('gulp-minify');
 var connect = require('gulp-connect');
 var watch =  require('gulp-watch');
+var source = require('vinyl-source-stream');
+var browserify = require('browserify');
 var babelify = require('babelify');
-var browserify = require('gulp-browserify');
-
-/**
- * Specify config for tasks
- */
-var config = {
-    index: 'src/index.html',
-    src: 'src',
-    dist: './dist',
-    distCss: './dist/css',
-    distJs: './dist/js',
-    srcCss: 'src/styles/**/*.sass',
-    srcJs: 'src/js/**/*.jsx'
-};
+var glob = require("glob");
 
 /**
  * Copy index file
@@ -51,17 +40,34 @@ gulp.task('server', ['style', 'scripts', 'copy'], function () {
 });
 
 /**
+ * Specify config for tasks
+ */
+var config = {
+    index: 'src/index.html',
+    src: 'src',
+    dist: './dist',
+    distCss: './dist/css',
+    distJs: './dist/js',
+    srcCss: 'src/styles/**/*.sass',
+    srcJs: 'src/js/**/*.jsx'
+};
+
+
+/**
  * JaveScript task
  */
+
 gulp.task('scripts', function () {
- 	return gulp.src(config.srcJs)
-    .pipe(jsx({
-      factory: 'React.createClass'
-    }))
-    .pipe(concat('scripts.js'))
-    browserify().transform("babelify", {presets: ["es2015"]})
-    .pipe(minify({ ext: { min: '.min.js' } }))
- 		.pipe(gulp.dest(config.distJs));
+  var testFiles = glob.sync('./dist/js/*.jsx');
+        return browserify({
+          entries: testFiles,
+          extensions: ['.jsx'],
+          debug: true
+        })
+        .bundle()
+        .pipe(source('scripts.js'))
+        .pipe(rename('scripts.min.js'))
+        .pipe(gulp.dest(config.distJs));
 });
 
 /**
