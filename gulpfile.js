@@ -35,7 +35,7 @@ var watchify = require('watchify');
 /**
  * Start local server for development
  */
- gulp.task('server', ['watch'], function () {
+ gulp.task('server', function () {
 
   var serverPort = process.env.PORT || 9000;
 
@@ -72,32 +72,32 @@ var watchify = require('watchify');
  * JaveScript task
  */
 
-var bundler = watchify(browserify({
-  debug: false,
-  extensions: config.extensions
-}))
+// gulp.task('bundle', bundle);
+
+gulp.task('bundle', function() {
+  var bundler = watchify(browserify({
+    debug: false,
+    extensions: config.extensions
+  }))
   .transform(babelify.configure({
     extensions: config.extensions,
     presets: ['react', 'es2015']
   }))
   .require('./src/js/main.jsx', {entry: true});
 
-livereload.listen();
+  livereload.listen();
 
-function bundle() {
   return bundler
-    .bundle()
-    .on('error', function (err) {
-      console.error('' + err);
-    })
-    .pipe(source('build.js'))
-    .pipe(gulp.dest(config.distJs))
-    .pipe(livereload());
-}
+  .bundle()
+  .on('error', function (err) {
+    console.error('' + err);
+  })
+  .pipe(source('build.js'))
+  .pipe(gulp.dest(config.distJs))
+  .pipe(livereload());
+  
+});
 
-gulp.task('bundle', bundle);
-bundler.on('update', bundle);
-bundler.on('log', console.log);
 
 
 /**
