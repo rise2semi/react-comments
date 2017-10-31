@@ -26,7 +26,7 @@ var watchify = require('watchify');
   distCss: './dist/css',
   distJs: './dist/js',
   srcCss: 'src/styles/**/*.sass',
-  srcJs: 'src/js/**/*.jsx, src/js/**/*.js',
+  srcJs: ['src/js/**/*.jsx', 'src/js/**/*.js'],
   entryPoint: 'src/js/main.jsx',
   minifiedOut: 'build.min.js',
   extensions: ['.js', '.json', '.es6', '.jsx']
@@ -51,8 +51,9 @@ var watchify = require('watchify');
  */
  gulp.task('copy', function () {
   gulp.src( config.index )
-  .pipe( gulp.dest( config.dist ) );
+  .pipe( gulp.dest( config.dist ));
 });
+
 
  /**
  * Style task
@@ -67,14 +68,11 @@ var watchify = require('watchify');
 });
 
 
-
 /**
  * JaveScript task
  */
 
-// gulp.task('bundle', bundle);
-
-gulp.task('bundle', function() {
+gulp.task('scripts', function() {
   var bundler = watchify(browserify({
     debug: false,
     extensions: config.extensions
@@ -83,32 +81,27 @@ gulp.task('bundle', function() {
     extensions: config.extensions,
     presets: ['react', 'es2015']
   }))
-  .require('./src/js/main.jsx', {entry: true});
-
-  livereload.listen();
-
-  return bundler
+  .require('./src/js/main.jsx', {entry: true})
   .bundle()
   .on('error', function (err) {
     console.error('' + err);
   })
   .pipe(source('build.js'))
   .pipe(gulp.dest(config.distJs))
-  .pipe(livereload());
-  
+ 
 });
 
 
 
-/**
+/*
  * Watch task
  */
- gulp.task('watch', ['style', 'copy', 'bundle'], function () {
-  watch(config.index, function () {
-    gulp.start('copy');
-  });
+ gulp.task('watch', ['style', 'copy', 'scripts'], function () {
   watch(config.srcCss, function () {
     gulp.start('style');
+  });
+  watch(config.index, function () {
+    gulp.start('copy');
   });
   watch(config.srcJs, function () {
     gulp.start('scripts');
