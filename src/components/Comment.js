@@ -1,16 +1,14 @@
 import React from 'react'
 
-
-
 function Comment(props) {
 	const {comment} = props
-	console.log(props)
 	const commentText = <div className="commentText">{comment.commentText}</div>
+	
 	return (		
-		<div className="commentsList">
-            <h2 className="userName">{comment.userName}</h2>
-            {<span>creation date: {(new Date(comment.date)).toDateString()}</span>}
+		<div>
             {commentText}
+            <span className="userName">by <b>{comment.userName}</b></span>
+            {<span>creation date: <b>{(new Date(comment.date)).toDateString()} </b></span>}
         </div>		
 	)
 }

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import logo from './img/logo.svg';
 import './css/style.css';
-import Comment from './components/Comment';
-import commentList from './commentList';
+import CommentList from './components/CommentList';
+import commentArray from './commentArray';
 
 class App extends Component {
   render() {
@@ -11,10 +11,8 @@ class App extends Component {
         <div className="appHeader">
           <img src={logo} className="appLogo" alt="logo" />
           <h2>React Comments</h2>
-        </div>
-        <div className="container">
-          <Comment comment={commentList[0]} />
-        </div>
+        </div>        
+        <CommentList commentArray={commentArray} />        
       </div>
     );
   }
