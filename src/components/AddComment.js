@@ -59,9 +59,10 @@ const CommentBox = createReactClass({
 		    comment.id = Date.now();
 		    comment.date = new Date();	    
 
-		    commentArray.push(comment);
+			commentArray.push(comment);
 		    console.log(commentArray);
 
+			this.props.onCommentSubmit();
 
 		    
 		    // $.ajax({

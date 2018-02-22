@@ -6,6 +6,11 @@ import CommentBox from './components/AddComment';
 import commentArray from './commentArray';
 
 class App extends Component {
+
+  handleCommentSubmit = () => {
+    this.forceUpdate();
+  }
+
   render() {
     return (
       <div className="app">
