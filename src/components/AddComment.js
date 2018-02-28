@@ -1,6 +1,5 @@
 import React from 'react';
-import commentArray from '../commentArray';
-// var $ = require ('jquery');
+import commentArray from '../commentArray.json';
 var createReactClass = require('create-react-class');
 
 const CommentForm = createReactClass({	
@@ -22,11 +21,13 @@ const CommentForm = createReactClass({
 
 		var userName = this.state.userName.trim();
 		var commentText = this.state.commentText.trim();
+
 		if (!userName || !commentText) {
 			return;
 		}
 		this.props.onCommentSubmit({userName: userName, commentText: commentText});
 		this.setState({userName: '', commentText: ''});
+
 	},
 
 	render() {		
@@ -41,61 +42,26 @@ const CommentForm = createReactClass({
 });
 
 const CommentBox = createReactClass({
-	// loadCommentsFromServer: function() {
-	// 	$.ajax({
-	// 		url: this.props.url,
-	// 		dataType: 'commentArray.js',
-	// 		cache: false,
-	// 		success: function(data) {
-	// 			this.setState({data: data});
-	// 		}.bind(this)
-	// 		// error: function(xhr, status, err) {
-	// 		// 	console.error(this.props.url, status, err.toString());
-	// 		// }.bind(this)
-	// 	});
-	// },
 	handleCommentSubmit: function(comment) {
-		// var comments = this.state.data;
-		    comment.id = Date.now();
-		    comment.date = new Date();	    
+	    comment.id = Date.now();
+	    comment.date = new Date();
 
-			commentArray.push(comment);
-		    console.log(commentArray);
+	    commentArray.unshift(comment);
+	    this.props.onCommentSubmit();	    	    
+	},
 
-			this.props.onCommentSubmit();
+	getInitialState: function() {
+	    return {data: []};
+	},
 
-		    
-		    // $.ajax({
-		    // 	url: this.props.url,
-		    // 	dataType: 'js',
-		    // 	type: 'POST',
-		    // 	data: commentArray,
-		    // 	success: function(data) {
-		    // 		this.setState({data: data});
-		    // 	}.bind(this),
-		    // 	error: function(xhr, status, err) {
-		    // 		this.setState({data: commentArray});
-		    // 		console.error(this.props.url, status, err.toString());
-		    // 	}.bind(this)
-		    // });
-		
-		    
-		},
-		getInitialState: function() {
-			return {data: []};
-		},
-		// componentDidMount: function() {
-		// 	this.loadCommentsFromServer();
-		// 	setInterval(this.loadCommentsFromServer, this.props.pollInterval);
-		// },
-		render: function() {
-			return (
-				<div className="commentBox">
-					<CommentForm onCommentSubmit={this.handleCommentSubmit} />
-				</div>
-			);
-		}
-	});
+	render: function() {
+		return (
+			<div className="commentBox">
+				<CommentForm onCommentSubmit={this.handleCommentSubmit} />
+			</div>
+		);
+	}
+});
 
 export default CommentBox
 

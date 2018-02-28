@@ -3,7 +3,10 @@ import logo from './img/logo.svg';
 import './css/style.css';
 import CommentList from './components/CommentList';
 import CommentBox from './components/AddComment';
-import commentArray from './commentArray';
+import commentArray from './commentArray.json';
+
+
+
 
 class App extends Component {
 
@@ -18,11 +21,12 @@ class App extends Component {
           <img src={logo} className="appLogo" alt="logo" />
           <h2>React Comments</h2>
         </div>        
-        <CommentList commentArray={commentArray} /> 
-        <CommentBox onCommentSubmit={this.handleCommentSubmit} />           
+        <CommentBox  onCommentSubmit={this.handleCommentSubmit} />           
+        <CommentList  commentArray={commentArray}  /> 
       </div>
     );
   }
+
 }
 
 export default App;
