@@ -1,21 +1,26 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans'); 
+* {
+	box-sizing: border-box;
+	font-family: 'Open Sans', sans-serif;
+}
 .app {
-  text-align: center;
+	text-align: center;
 }
 
 .appLogo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+	animation: App-logo-spin infinite 20s linear;
+	height: 80px;
 }
 
 .appHeader {
-  background-color: #224055;
-  height: 150px;
-  padding: 20px;
-  color: white;
+	background-color: #224055;
+	height: 150px;
+	padding: 20px;
+	color: white;
 }
 
 .appContainer {
-	margin: 50px auto;
+	margin: 50px auto 0;
 	width: 100%;
 	max-width: 1024px;
 }
@@ -34,8 +39,52 @@
 	display: block;
 	font-size: 12px;
 }
+.addCommentForm {
+	margin: 50px auto;
+	text-align: center;
+	width: 100%;
+	max-width: 480px;
+}
+.addCommentForm input {
+	width: 100%;
+	padding: 5px 10px;
+	margin: 0 0 10px;
+	border: 1px solid #e5e5e5;
+}
+.addCommentForm textarea {
+	width: 100%;
+	height: auto;
+	min-height: 80px;
+	resize: vertical;
+	padding: 10px;
+	border: 1px solid #e5e5e5;
+	margin: 0 0 10px;
+}
+.addCommentForm input:focus,
+.addCommentForm textarea:focus {
+	outline: 0 none;
+	border: 1px solid #93D8D3;
+	-webkit-box-shadow: 0px 0px 3px 1px rgba(147,216,211,0.9);
+	-moz-box-shadow: 0px 0px 3px 1px rgba(147,216,211,0.9);
+	box-shadow: 0px 0px 3px 1px rgba(147,216,211,0.9);
+}
+.addCommentForm button {
+	background: #226cc8;
+	font-size: 16px;
+	color: #fff;
+	height: 32px;
+	line-height: 32px;
+	padding: 0 20px;
+	border: 0 none;
+	cursor: pointer;
+}
+.addCommentForm button:hover {
+	background: #2D77D5;
+}
+
+
 
 @keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+	from { transform: rotate(0deg); }
+	to { transform: rotate(360deg); }
 }

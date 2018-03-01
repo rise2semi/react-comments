@@ -2,9 +2,18 @@ import React, { Component } from 'react';
 import logo from './img/logo.svg';
 import './css/style.css';
 import CommentList from './components/CommentList';
-import commentArray from './commentArray';
+import CommentBox from './components/AddComment';
+import commentArray from './commentArray.json';
+
+
+
 
 class App extends Component {
+
+  handleCommentSubmit = () => {
+    this.forceUpdate();
+  }
+
   render() {
     return (
       <div className="app">
@@ -12,10 +21,12 @@ class App extends Component {
           <img src={logo} className="appLogo" alt="logo" />
           <h2>React Comments</h2>
         </div>        
-        <CommentList commentArray={commentArray} />        
+        <CommentBox  onCommentSubmit={this.handleCommentSubmit} />           
+        <CommentList  commentArray={commentArray}  /> 
       </div>
     );
   }
+
 }
 
 export default App;
