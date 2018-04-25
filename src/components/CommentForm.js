@@ -13,8 +13,8 @@ class CommentForm extends React.Component {
 	    
 	    this.handleUserNameChange = this.handleUserNameChange.bind(this);
     	this.handleTextAreaChange = this.handleTextAreaChange.bind(this);
-    	this.handleSubmit = this.handleSubmit.bind(this);
-
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this.nameInput = React.createRef();
 	}
 
 	handleUserNameChange(event) {
@@ -37,15 +37,20 @@ class CommentForm extends React.Component {
 		this.setState({userName: '', commentText: ''});
 	}
 
+	handleChildClick = (commentId) => {
+		this.nameInput.current.focus();
+		console.log('click', commentId);
+	}
+
 	render() {		
 		return (
 			<React.Fragment>
 				<form onSubmit={this.handleSubmit} className="addCommentForm">
-					<input value={this.state.userName}  onChange={this.handleUserNameChange}  type="text" placeholder="Type your name" name='userName' />
+					<input ref={this.nameInput} value={this.state.userName}  onChange={this.handleUserNameChange}  type="text" placeholder="Type your name" name='userName' />
 					<textarea value={this.state.commentText} onChange={this.handleTextAreaChange} placeholder="Leave a comment" name="comment"></textarea>
 					<button onClick={this.handleSubmit}  type="submit">Comment</button>
 				</form>		
-				<CommentList commentArray={commentArray} onClick={this.handleChildClick} />
+				<CommentList commentArray={commentArray} handleChildClick={this.handleChildClick} />
 			</React.Fragment>				
 		)
 	}

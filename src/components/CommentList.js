@@ -10,7 +10,7 @@ class Comment extends React.Component {
 		            <div className="commentText">{this.props.commentText}</div>
 		            <span className="userName">by <b>{this.props.userName}</b></span>
 		            {<span>creation date: <b>{(new Date(this.props.date)).toString().slice(0, 25)}</b></span>}
-		            <button onClick={this.props.onClick} type="submit">Reply</button>		            
+		            <button onClick={() => this.props.handleChildClick(this.props.id)} type="submit">Reply</button>		            
 			     </div>
 		  		{ this.props.children }
 		  	</div>
@@ -28,7 +28,7 @@ class CommentList extends React.Component {
 	    }
 	    
 	    return commentArray.map((node, index) => {
-	        return <Comment key={ node.id } commentText={node.commentText} userName={node.userName} date={node.date} onClick={this.handleChildClick}>
+	        return <Comment key={ node.id } id={ node.id } commentText={node.commentText} userName={node.userName} date={node.date} handleChildClick={this.props.handleChildClick}>
 	        	{children(node.replyComment)}	  
 	      	</Comment>
 	    })
