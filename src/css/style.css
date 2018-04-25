@@ -27,17 +27,43 @@
 
 .commentElement {
 	margin: 0 0 20px;
+}
+.commentBody {
 	background: #f9f9f9;
 	border-left: 3px solid #91D7D3;
 	padding: 15px;
 	text-align: left;
+	position: relative;
+	margin: 0 0 20px;
 }
-.commentElement .commentText {
+.replyComment .commentBody {
+	margin: 0 0 20px 10%;
+	border-left: 3px solid #000000;
+}
+.commentBody .commentText {
 	margin: 0 0 10px;
 }
-.commentElement span {
+.commentBody span {
 	display: block;
 	font-size: 12px;
+}
+.commentBody button{
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	border: 0 none;
+	padding: 2px 20px;
+	color: #000;
+	background: #66DBF9;
+	cursor: pointer;
+	text-transform: lowercase;
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 18px;
+	outline: none;
+}
+.commentBody button:hover {
+	background: #48CCEB;
 }
 .addCommentForm {
 	margin: 50px auto;

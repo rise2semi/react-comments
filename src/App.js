@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import logo from './img/logo.svg';
 import './css/style.css';
-import CommentList from './components/CommentList';
-import CommentBox from './components/AddComment';
+
+import CommentForm from './components/CommentForm';
 import commentArray from './commentArray.json';
 
 
@@ -10,9 +10,21 @@ import commentArray from './commentArray.json';
 
 class App extends Component {
 
-  handleCommentSubmit = () => {
-    this.forceUpdate();
+  constructor (props){
+      super(props);
+
+      this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
   }
+
+  handleCommentSubmit = comment => {
+      comment.id = Date.now();
+      comment.date = new Date();
+      commentArray.unshift(comment);
+
+      this.forceUpdate();         
+  }
+
+
 
   render() {
     return (
@@ -21,8 +33,8 @@ class App extends Component {
           <img src={logo} className="appLogo" alt="logo" />
           <h2>React Comments</h2>
         </div>        
-        <CommentBox  onCommentSubmit={this.handleCommentSubmit} />           
-        <CommentList  commentArray={commentArray}  /> 
+        <CommentForm onCommentSubmit={this.handleCommentSubmit} />          
+         
       </div>
     );
   }

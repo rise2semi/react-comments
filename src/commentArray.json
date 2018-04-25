@@ -3,12 +3,30 @@
 		"id": "56c782fghgfc2c3268ddb3201",
 		"date": "2009-06-09T15:20:00Z",
 		"userName" : "Bob",
-		"commentText": "1asdasd asd asdasd asd asd asd asd asd asd as dasd asd asd asd"
+		"commentText": "1 asdasd asd asdasd asd asd asd asd asd asd as dasd asd asd asd",
+		"replyComment": [{
+			"id": "56c782fghgfc2c3268ddb320d",
+			"date": "2009-03-09T15:20:00Z",
+			"userName" : "John",
+			"commentText": "1.1 asdasdasd asd asd asd asd asda",
+			"replyComment": [{
+				"id": "56c782fghgfc2csss3268ddb320d",
+				"date": "2002-03-09T15:20:00Z",
+				"userName" : "Fabian",
+				"commentText": "1.2 asdasdasd asd asd asd asd asda"
+			}]			
+		}]
 	},
 	{
 		"id": "56c782fghgfc2c3268ddb3206",
 		"date": "2016-06-08T19:03:23",
 		"userName": "Noah",
-		"commentText": "2Commodo laborum sit nostrud reprehenderit cupidatat officia laboris. Ipsum minim culpa in enim. Voluptate dolor ea irure nisi incididunt enim magna.\n\nCupidatat quis cillum velit culpa tempor esse irure nostrud ea consectetur officia fugiat irure qui. Enim quis officia do in. Velit veniam ipsum consequat aliqua duis voluptate. Minim nisi ex aute ad.\n\nNisi Lorem ex tempor adipisicing labore. Quis occaecat fugiat pariatur labore culpa cillum laboris. Labore occaecat ut laborum sit ex do sit. Deserunt consectetur elit aute laboris est deserunt officia ullamco sit laboris officia aliquip. Aliqua ut sunt nostrud voluptate excepteur quis incididunt Lorem ut."
+		"commentText": "2 Commodo laborum sit nostrequat aliqua duis voluptate. Minim nisi ex auta ut sunt nostrud voluptate excepteur quis incididunt Lorem ut.",
+		"replyComment": [{
+			"id": "56c782fghgfc2c326s8ddb320d",
+			"date": "2019-03-09T15:20:00Z",
+			"userName" : "Bad",
+			"commentText": "2.1 asdasdasd asd asd asd asd asda"
+		}]
 	}
 ]
